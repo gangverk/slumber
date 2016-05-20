@@ -100,7 +100,7 @@ class Resource(ResourceAttributesMixin, object):
             exception_class = exceptions.HttpNotFoundError if resp.status_code == 404 else exceptions.HttpClientError
             raise exception_class("Client Error %s: %s" % (resp.status_code, url), response=resp, content=resp.content)
         elif 500 <= resp.status_code <= 599:
-            raise exceptions.HttpServerError("Server Error %s: %s \n %s" % (resp.status_code, url, resp.content), response=resp, content=resp.content)
+            raise exceptions.HttpServerError("Server Error %s: %s \n %s \n %s" % (resp.status_code, url, resp.content, data or ""), response=resp, content=resp.content)
 
         self._ = resp
 
